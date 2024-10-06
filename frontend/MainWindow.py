@@ -1,4 +1,4 @@
-from WhatsApp import WhatsAppMessenger
+from frontend.WhatsApp import WhatsAppMessenger
 from PyQt5.QtWidgets import QMainWindow, QPushButton
 
 

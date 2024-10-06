@@ -2,7 +2,7 @@ import sys
 import qdarkstyle
 import qdarktheme
 from PyQt5.QtWidgets import QApplication
-from MainWindow import MainWindow
+from frontend.MainWindow import MainWindow
 
 def main():
     app = QApplication(sys.argv)
