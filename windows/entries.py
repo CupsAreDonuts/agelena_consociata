@@ -7,13 +7,13 @@ from windows.add_new_entry import NewEntryWindow
 
 class Entries(QWidget):
     def __init__(self, startup_window):
-        super().__init__()
+        super().__init__()  # noqa
         self.startup_window = startup_window
         self.add_new_entry_window = None
 
         self.people = get_people()
         self.people_as_table = pd.DataFrame(list(self.people.find()))
-        self.people_list = QListWidget()
+        self.people_list = QListWidget()  # noqa
         self.fill_people_list()
 
         self.view_entry_button = QPushButton('View')

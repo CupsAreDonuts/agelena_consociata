@@ -4,7 +4,7 @@ from windows.entries import Entries
 
 class StartUp(QWidget):
     def __init__(self):
-        super().__init__()
+        super().__init__()  # noqa
         self.view_entries = QPushButton('View Entries')
         self.entries = None
 

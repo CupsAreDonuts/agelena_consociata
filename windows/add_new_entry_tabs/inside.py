@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QWidget, QLabel, QTextEdit, QLineEdit, QGridLayout, 
 
 class InsideAttributes(QWidget):
     def __init__(self, entries_window):
-        super().__init__()
+        super().__init__()  # noqa
         self.entries_window = entries_window
 
         self.likes_label = QLabel('Likes:')

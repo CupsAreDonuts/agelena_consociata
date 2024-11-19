@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QWidget, QLabel, QTextEdit, QLineEdit, QGridLayout, 
 
 class RelationalAttributes(QWidget):
     def __init__(self, entries_window):
-        super().__init__()
+        super().__init__()  # noqa
         self.entries_window = entries_window
         self.family_members_label = QLabel('Family members:')
         self.family_members_input = QTextEdit()
