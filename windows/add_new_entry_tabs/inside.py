@@ -2,9 +2,9 @@ from PyQt5.QtWidgets import QWidget, QLabel, QTextEdit, QLineEdit, QGridLayout, 
 
 
 class InsideAttributes(QWidget):
-    def __init__(self, entries_window):
+    def __init__(self, add_new_entry_window):
         super().__init__()  # noqa
-        self.entries_window = entries_window
+        self.add_new_entry_window = add_new_entry_window
 
         self.likes_label = QLabel('Likes:')
         self.likes_input = QTextEdit()
@@ -44,9 +44,12 @@ class InsideAttributes(QWidget):
         self.hobbies_input = QTextEdit()
 
         self.add_entry_button = QPushButton('Add')
-        self.add_entry_button.setMinimumWidth(130)
-
         self.back_button = QPushButton('Back')
+
+    def create_tab(self):
+        self.add_entry_button.setMinimumWidth(130)
+        self.add_entry_button.clicked.connect(self.add_new_entry_window.add_button_clicked)  # noqa
+        self.back_button.clicked.connect(self.add_new_entry_window.back_button_clicked)  # noqa
 
         layout = QGridLayout()
         layout.addWidget(self.likes_label, 0, 0, 1, 1)
@@ -89,3 +92,25 @@ class InsideAttributes(QWidget):
         layout.addWidget(self.back_button, 1, 2, 1, 1)
         self.setLayout(layout)
         self.setWindowTitle('Agelena Consociata')
+
+    def collect_information(self):
+        return {
+            'likes': self.likes_input.toPlainText(),
+            'dislikes': self.dislikes_input.toPlainText(),
+            'wants': self.wants_input.toPlainText(),
+            'fears': self.fears_input.toPlainText(),
+            'confidence': self.confidence_input.text(),
+            'openness': self.openness_input.text(),
+            'conscientiousness': self.conscientiousness_input.text(),
+            'extraversion': self.extraversion_input.text(),
+            'agreeableness': self.agreeableness_input.text(),
+            'neuroticism': self.neuroticism_input.text(),
+            'ambitiousness': self.ambitiousness_input.text(),
+            'education': self.education_input.text(),
+            'subject_of_study': self.subject_of_study_input.text(),
+            'bad_mental_health_indicators': self.bad_mental_health_indicators_input.toPlainText(),
+            'risk_tolerance': self.risk_tolerance_input.text(),
+            'risk_seeking': self.risk_seeking_input.text(),
+            'goals': self.goals_input.toPlainText(),
+            'hobbies': self.hobbies_input.toPlainText()
+        }

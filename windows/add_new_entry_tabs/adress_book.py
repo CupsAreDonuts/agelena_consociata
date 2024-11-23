@@ -35,10 +35,12 @@ class AddressBook(QWidget):
         self.history_summary_input = QTextEdit()
 
         self.add_entry_button = QPushButton('Add')
-        self.add_entry_button.clicked.connect(self.add_new_entry_window.add_button_clicked)  # noqa
-        self.add_entry_button.setMinimumWidth(130)
         self.back_button = QPushButton('Back')
 
+    def create_tab(self):
+        self.add_entry_button.clicked.connect(self.add_new_entry_window.add_button_clicked)  # noqa
+        self.add_entry_button.setMinimumWidth(130)
+        self.back_button.clicked.connect(self.add_new_entry_window.back_button_clicked)  # noqa
         layout = QGridLayout()
         layout.addWidget(self.first_name_label, 0, 0, 1, 1)
         layout.addWidget(self.first_name_input, 0, 1, 1, 1)

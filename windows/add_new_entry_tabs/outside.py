@@ -2,9 +2,9 @@ from PyQt5.QtWidgets import QWidget, QLabel, QTextEdit, QLineEdit, QGridLayout, 
 
 
 class OutsideAttributes(QWidget):
-    def __init__(self, entries_window):
+    def __init__(self, add_new_entry_window):
         super().__init__()  # noqa
-        self.entries_window = entries_window
+        self.add_new_entry_window = add_new_entry_window
 
         self.body_language_label = QLabel('Typical bodylanguage:')
         self.body_language_input = QTextEdit()
@@ -38,9 +38,13 @@ class OutsideAttributes(QWidget):
         self.phone_usage_input = QLineEdit()
         self.social_media_usage_label = QLabel('Social media usage behaviour:')
         self.social_media_usage_input = QTextEdit()
-        self.add_button = QPushButton('Add')
-        self.add_button.setMinimumWidth(130)
+        self.add_entry_button = QPushButton('Add')
         self.back_button = QPushButton('Back')
+
+    def create_tab(self):
+        self.add_entry_button.setMinimumWidth(130)
+        self.add_entry_button.clicked.connect(self.add_new_entry_window.add_button_clicked)  # noqa
+        self.back_button.clicked.connect(self.add_new_entry_window.back_button_clicked)  # noqa
 
         layout = QGridLayout()
         layout.addWidget(self.body_language_label, 0, 0, 1, 1)
@@ -75,7 +79,26 @@ class OutsideAttributes(QWidget):
         layout.addWidget(self.phone_usage_input, 14, 1, 1, 1)
         layout.addWidget(self.social_media_usage_label, 15, 0, 1, 1)
         layout.addWidget(self.social_media_usage_input, 15, 1, 1, 1)
-        layout.addWidget(self.add_button, 0, 2, 1, 1)
+        layout.addWidget(self.add_entry_button, 0, 2, 1, 1)
         layout.addWidget(self.back_button, 1, 2, 1, 1)
-
         self.setLayout(layout)
+
+    def collect_information(self):
+        information = {
+            'body_language': self.body_language_input.toPlainText(),
+            'clothes_style': self.clothes_style_input.toPlainText(),
+            'hygiene': self.hygiene_input.text(),
+            'sexual_orientation': self.sexual_orientation_input.text(),
+            'studying_behaviour': self.studying_behaviour_input.toPlainText(),
+            'loyalty': self.loyalty_input.toPlainText(),
+            'current_job': self.current_job_input.text(),
+            'job_history': self.job_history_input.toPlainText(),
+            'political_strategies': self.political_strategies_input.toPlainText(),
+            'previous_projects': self.projects_undertaken_input.toPlainText(),
+            'successful_projects': self.successful_projects_input.toPlainText(),
+            'failed_projects': self.failed_projects_input.toPlainText(),
+            'social_style': self.social_style_input.toPlainText(),
+            'base_trust': self.base_trust_input.text(),
+            'phone_usage': self.phone_usage_input.text(),
+            'social_media_usage': self.social_media_usage_input.toPlainText()}
+        return information
