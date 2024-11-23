@@ -7,6 +7,7 @@ from windows.startup import StartUp
 def run():
     app = QApplication(sys.argv)
     startup_window = StartUp()
+    startup_window.create_window()
     startup_window.show()
     app.exec()
 
