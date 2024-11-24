@@ -5,8 +5,6 @@ class AddressBook(QWidget):
     def __init__(self, add_new_entry_window):
         super().__init__()  # noqa
         self.add_new_entry_window = add_new_entry_window
-        self.setWindowTitle('Agelena Consociata')
-
         self.first_name_label = QLabel('First Name:')
         self.first_name_input = QLineEdit()
         self.middle_name_label = QLabel('Middle Name:')
@@ -71,6 +69,8 @@ class AddressBook(QWidget):
         layout.addWidget(self.add_entry_button, 0, 3, 1, 1)
         layout.addWidget(self.back_button, 1, 3, 1, 1)
         self.setLayout(layout)
+
+        self.setWindowTitle('Agelena Consociata')
 
     def collect_information(self):
         return {
