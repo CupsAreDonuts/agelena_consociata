@@ -1,14 +1,13 @@
 from PyQt5.QtWidgets import QWidget, QPushButton, QGridLayout, QShortcut
-from PyQt5.QtGui import QKeySequence, QIcon
+from PyQt5.QtGui import QKeySequence
 from windows.entries import Entries
 
 
 class StartUp(QWidget):
     def __init__(self):
         super().__init__()  # noqa
-        self.view_entries = QPushButton('View Entries')
+        self.view_entries = QPushButton('Entries')
         self.entries = None
-
 
     def create_window(self):
         view_entries_shortcut = QShortcut(QKeySequence('E'), self)
@@ -20,7 +19,6 @@ class StartUp(QWidget):
 
         self.setWindowTitle('Welcome to Agelena Consociata')
         self.setGeometry(300, 300, 300, 300)
-
 
     def view_entries_clicked(self):
         self.entries = Entries(startup_window=self)
