@@ -1,7 +1,7 @@
 import pandas as pd
 from PyQt5.QtWidgets import QWidget, QPushButton, QGridLayout, QListWidget, QLabel, QMessageBox
 
-from data.mongo import get_people
+from data.mongo import get_people, get_all_entries_of_person
 from windows.add_new_entry import NewEntryWindow
 
 
@@ -15,29 +15,27 @@ class Entries(QWidget):
         self.people_as_table = None
         self.people_list = QListWidget()  # noqa
 
-        self.view_entry_button = QPushButton('View')
         self.add_entry_button = QPushButton('Add new entry')
+        self.view_and_edit_entry_button = QPushButton('View and Edit')
         self.delete_button = QPushButton('Delete')
-        self.edit_entry_button = QPushButton('Edit')
         self.people_list_headline = QLabel('People with Entry')
 
-
     def create_window(self):
-        self.people_list_headline.setMaximumHeight(self.view_entry_button.sizeHint().height())
+        self.people_list_headline.setMaximumHeight(self.view_and_edit_entry_button.sizeHint().height())
         if list(self.people.find()):
             self.people_as_table = pd.DataFrame(list(self.people.find()))
             self.fill_people_list()
 
         self.add_entry_button.clicked.connect(self.add_entry_button_clicked)  # noqa
+        self.view_and_edit_entry_button.clicked.connect(self.view_and_edit_button_clicked)  # noqa
         self.delete_button.clicked.connect(self.delete_entry_button_clicked)  # noqa
 
         layout = QGridLayout()
         layout.addWidget(self.people_list_headline, 0, 0, 1, 1)
         layout.addWidget(self.people_list, 1, 0, 10, 1)
-        layout.addWidget(self.view_entry_button, 1, 1, 1, 1)
-        layout.addWidget(self.add_entry_button, 2, 1, 1, 1)
-        layout.addWidget(self.edit_entry_button, 3, 1, 1, 1)
-        layout.addWidget(self.delete_button, 4, 1, 1, 1)
+        layout.addWidget(self.add_entry_button, 1, 1, 1, 1)
+        layout.addWidget(self.view_and_edit_entry_button, 2, 1, 1, 1)
+        layout.addWidget(self.delete_button, 3, 1, 1, 1)
         self.setLayout(layout)
         self.setWindowTitle('Agelena Consociata')
         self.setGeometry(400, 400, 900, 556)
@@ -64,8 +62,17 @@ class Entries(QWidget):
             if reply == QMessageBox.Ok:
                 delete_filter = {"first_name": names[0], "last_name": names[1]}
                 self.people.delete_one(delete_filter)
-
             self.refresh()
+
+    def view_and_edit_button_clicked(self):
+        if self.people_list.currentItem():
+            first_name, last_name = self.people_list.currentItem().text().split(' ')
+            people_found = get_all_entries_of_person(first_name, last_name)
+            for person in people_found:
+                self.setVisible(False)
+                self.add_new_entry_window = NewEntryWindow(entries_window=self, edit_mode=True, person=person)
+                self.add_new_entry_window.create_window()
+                self.add_new_entry_window.show()
 
     def refresh(self):
         self.hide()

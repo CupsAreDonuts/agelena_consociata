@@ -59,14 +59,50 @@ class RelationalAttributes(QWidget):
         self.reputation_in_each_social_circle_input = QTextEdit()
         self.reputation_with_close_friends_label = QLabel('Reputation with close friends:')
         self.reputation_with_close_friends_input = QTextEdit()
-        self.specific_actions_in_past_label = QLabel('tba')
-        self.predicted_future_actions_label = QLabel('tba')
         self.past_meetings_label = QLabel('Past Meetings:')
         self.past_meetings_input = QTextEdit()
         self.add_entry_button = QPushButton('Add')
         self.back_button = QPushButton('Back')
 
     def create_tab(self):
+        if self.add_new_entry_window.edit_mode:
+            self.family_members_input.setText(self.add_new_entry_window.person['family_members'])
+            self.close_people_input.setText(self.add_new_entry_window.person['close_people'])
+            self.main_caregiver_as_child_input.setText(self.add_new_entry_window.person['main_caregiver_as_child'])
+            self.main_caregiver_behaviour_input.setText(self.add_new_entry_window.person['main_caregiver_behaviour'])
+            self.parents_input.setText(self.add_new_entry_window.person['parents'])
+            self.parental_care_input.setText(self.add_new_entry_window.person['parental_care'])
+            self.siblings_input.setText(self.add_new_entry_window.person['siblings'])
+            self.sibling_care_input.setText(self.add_new_entry_window.person['siblings_care'])
+            self.current_romantic_partner_input.setText(self.add_new_entry_window.person['current_romantic_partner'])
+            self.romantic_ex_partners_input.setText(self.add_new_entry_window.person['romantic_ex_partners'])
+            self.type_of_romantic_relationships_in_past_input.setText(
+                self.add_new_entry_window.person['type_of_romantic_relationships_in_past'])
+            self.type_of_romantic_relationship_at_present_input.setText(
+                self.add_new_entry_window.person['type_of_romantic_relationship_at_present'])
+            self.close_friends_input.setText(self.add_new_entry_window.person['close_friends'])
+            self.close_enemies_input.setText(self.add_new_entry_window.person['close_enemies'])
+            self.likes_these_people_input.setText(self.add_new_entry_window.person['likes_these_people'])
+            self.dislikes_these_people_input.setText(self.add_new_entry_window.person['dislikes_these_people'])
+            self.social_circles_input.setText(self.add_new_entry_window.person['social_circles'])
+            self.close_friend_groups_input.setText(self.add_new_entry_window.person['close_friend_groups'])
+            self.relationship_with_family_input.setText(self.add_new_entry_window.person['relationship_with_family'])
+            self.frequency_of_visiting_family_input.setText(
+                self.add_new_entry_window.person['frequency_of_visiting_family'])
+            self.likes_to_visit_family_input.setText(self.add_new_entry_window.person['likes_to_visit_family'])
+            self.current_crushes_input.setText(self.add_new_entry_window.person['current_crushes'])
+            self.possibly_useful_people_for_person_input.setText(
+                self.add_new_entry_window.person['possibly_useful_people_for_this_person'])
+            self.person_probably_useful_for_these_people_input.setText(
+                self.add_new_entry_window.person['person_probably_useful_for_these_people'])
+            self.useful_people_already_known_to_person_input.setText(
+                self.add_new_entry_window.person['useful_people_already_known_to_person'])
+            self.reputation_in_each_social_circle_input.setText(
+                self.add_new_entry_window.person['reputation_in_each_social_circle'])
+            self.reputation_with_close_friends_input.setText(
+                self.add_new_entry_window.person['reputation_with_close_friends'])
+            self.past_meetings_input.setText(self.add_new_entry_window.person['past_meetings'])
+
         self.add_entry_button.setMinimumWidth(130)
         self.add_entry_button.clicked.connect(self.add_new_entry_window.add_button_clicked)  # noqa
         self.back_button.clicked.connect(self.add_new_entry_window.back_button_clicked)  # noqa
@@ -126,10 +162,8 @@ class RelationalAttributes(QWidget):
         layout.addWidget(self.reputation_in_each_social_circle_input, 9, 3, 1, 1)
         layout.addWidget(self.reputation_with_close_friends_label, 10, 2, 1, 1)
         layout.addWidget(self.reputation_with_close_friends_input, 10, 3, 1, 1)
-        layout.addWidget(self.specific_actions_in_past_label, 11, 2, 1, 1)
-        layout.addWidget(self.predicted_future_actions_label, 11, 3, 1, 1)
-        layout.addWidget(self.past_meetings_label, 12, 2, 1, 1)
-        layout.addWidget(self.past_meetings_input, 12, 3, 1, 1)
+        layout.addWidget(self.past_meetings_label, 11, 2, 1, 1)
+        layout.addWidget(self.past_meetings_input, 11, 3, 1, 1)
         layout.addWidget(self.add_entry_button, 0, 4, 1, 1)
         layout.addWidget(self.back_button, 1, 4, 1, 1)
 
@@ -165,7 +199,5 @@ class RelationalAttributes(QWidget):
             'useful_people_already_known_to_person': self.useful_people_already_known_to_person_input.toPlainText(),
             'reputation_in_each_social_circle': self.reputation_in_each_social_circle_input.toPlainText(),
             'reputation_with_close_friends': self.reputation_with_close_friends_input.toPlainText(),
-            'specific_actions_in_past': '',  # tba
-            'predicted_future_actions': '',  # tba
             'past_meetings': self.past_meetings_input.toPlainText()
         }
