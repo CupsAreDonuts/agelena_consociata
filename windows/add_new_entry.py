@@ -1,6 +1,6 @@
 import datetime
 from PyQt5.QtWidgets import QTabWidget, QMessageBox
-from data.mongo import add_person_in_people
+from data.mongo import add_person_in_people, edit_person_in_people
 
 from windows.add_new_entry_tabs.adress_book import AddressBook
 from windows.add_new_entry_tabs.inside import InsideAttributes
@@ -9,9 +9,11 @@ from windows.add_new_entry_tabs.relations import RelationalAttributes
 
 
 class NewEntryWindow(QTabWidget):
-    def __init__(self, entries_window):
+    def __init__(self, entries_window, edit_mode=False, person=None):
         super().__init__()  # noqa
         self.entries_window = entries_window
+        self.edit_mode = edit_mode
+        self.person = person
 
         self.address_book = AddressBook(self)
         self.inside_personal_attributes = InsideAttributes(self)
@@ -39,8 +41,11 @@ class NewEntryWindow(QTabWidget):
 
     def add_button_clicked(self):
         personal_attributes = self.collect_all_information()
-
-        add_person_in_people(personal_attributes)
+        if self.edit_mode:
+            personal_attributes['_id'] = self.person['_id']
+            edit_person_in_people(personal_attributes)
+        else:
+            add_person_in_people(personal_attributes)
         self.show_completed()
         self.entries_window.refresh()
         self.entries_window.setVisible(True)

@@ -42,6 +42,24 @@ class OutsideAttributes(QWidget):
         self.back_button = QPushButton('Back')
 
     def create_tab(self):
+        if self.add_new_entry_window.edit_mode:
+            self.body_language_input.setText(self.add_new_entry_window.person['body_language'])
+            self.clothes_style_input.setText(self.add_new_entry_window.person['clothes_style'])
+            self.hygiene_input.setText(self.add_new_entry_window.person['hygiene'])
+            self.sexual_orientation_input.setText(self.add_new_entry_window.person['sexual_orientation'])
+            self.studying_behaviour_input.setText(self.add_new_entry_window.person['studying_behaviour'])
+            self.loyalty_input.setText(self.add_new_entry_window.person['loyalty'])
+            self.current_job_input.setText(self.add_new_entry_window.person['current_job'])
+            self.job_history_input.setText(self.add_new_entry_window.person['job_history'])
+            self.political_strategies_input.setText(self.add_new_entry_window.person['political_strategies'])
+            self.projects_undertaken_input.setText(self.add_new_entry_window.person['previous_projects'])
+            self.successful_projects_input.setText(self.add_new_entry_window.person['successful_projects'])
+            self.failed_projects_input.setText(self.add_new_entry_window.person['failed_projects'])
+            self.social_style_input.setText(self.add_new_entry_window.person['social_style'])
+            self.base_trust_input.setText(self.add_new_entry_window.person['base_trust'])
+            self.phone_usage_input.setText(self.add_new_entry_window.person['phone_usage'])
+            self.social_media_usage_input.setText(self.add_new_entry_window.person['social_media_usage'])
+
         self.add_entry_button.setMinimumWidth(130)
         self.add_entry_button.clicked.connect(self.add_new_entry_window.add_button_clicked)  # noqa
         self.back_button.clicked.connect(self.add_new_entry_window.back_button_clicked)  # noqa

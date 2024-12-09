@@ -5,8 +5,6 @@ class AddressBook(QWidget):
     def __init__(self, add_new_entry_window):
         super().__init__()  # noqa
         self.add_new_entry_window = add_new_entry_window
-        self.setWindowTitle('Agelena Consociata')
-
         self.first_name_label = QLabel('First Name:')
         self.first_name_input = QLineEdit()
         self.middle_name_label = QLabel('Middle Name:')
@@ -38,6 +36,21 @@ class AddressBook(QWidget):
         self.back_button = QPushButton('Back')
 
     def create_tab(self):
+        if self.add_new_entry_window.edit_mode:
+            self.first_name_input.setText(self.add_new_entry_window.person['first_name'])
+            self.middle_name_input.setText(self.add_new_entry_window.person['middle_name'])
+            self.last_name_input.setText(self.add_new_entry_window.person['last_name'])
+            self.birthday_input.setText(self.add_new_entry_window.person['birthday'])
+            self.gender_input.setText(self.add_new_entry_window.person['gender'])
+            self.mobile_phone_input.setText(self.add_new_entry_window.person['mobile_phone'])
+            self.email_input.setText(self.add_new_entry_window.person['email'])
+            self.street_and_number_input.setText(self.add_new_entry_window.person['street_and_number'])
+            self.postcode_input.setText(self.add_new_entry_window.person['postcode'])
+            self.city_input.setText(self.add_new_entry_window.person['city'])
+            self.country_input.setText(self.add_new_entry_window.person['country'])
+            self.first_contact_input.setText(self.add_new_entry_window.person['first_contact'])
+            self.history_summary_input.setText(self.add_new_entry_window.person['history'])
+
         self.add_entry_button.clicked.connect(self.add_new_entry_window.add_button_clicked)  # noqa
         self.add_entry_button.setMinimumWidth(130)
         self.back_button.clicked.connect(self.add_new_entry_window.back_button_clicked)  # noqa
@@ -71,6 +84,8 @@ class AddressBook(QWidget):
         layout.addWidget(self.add_entry_button, 0, 3, 1, 1)
         layout.addWidget(self.back_button, 1, 3, 1, 1)
         self.setLayout(layout)
+
+        self.setWindowTitle('Agelena Consociata')
 
     def collect_information(self):
         return {
