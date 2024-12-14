@@ -1,6 +1,6 @@
 import pandas as pd
-from PyQt5.QtWidgets import QWidget, QPushButton, QGridLayout, QListWidget, QLabel, QMessageBox
-
+from PyQt5.QtWidgets import QWidget, QPushButton, QGridLayout, QListWidget, QLabel, QMessageBox, QShortcut
+from PyQt5.QtGui import QKeySequence
 from data.mongo import get_people, get_all_entries_of_person
 from windows.add_new_entry import NewEntryWindow
 
@@ -18,6 +18,8 @@ class Entries(QWidget):
         self.add_entry_button = QPushButton('Add new entry')
         self.view_and_edit_entry_button = QPushButton('View and Edit')
         self.delete_button = QPushButton('Delete')
+        self.back_button = QPushButton('Back (B)')
+        self.back_button_shortcut = QShortcut(QKeySequence('B'), self)
         self.people_list_headline = QLabel('People with Entry')
 
     def create_window(self):
@@ -29,6 +31,8 @@ class Entries(QWidget):
         self.add_entry_button.clicked.connect(self.add_entry_button_clicked)  # noqa
         self.view_and_edit_entry_button.clicked.connect(self.view_and_edit_button_clicked)  # noqa
         self.delete_button.clicked.connect(self.delete_entry_button_clicked)  # noqa
+        self.back_button.clicked.connect(self.back_button_clicked)  # noqa
+        self.back_button_shortcut.activated.connect(self.back_button_clicked)  # noqa
 
         layout = QGridLayout()
         layout.addWidget(self.people_list_headline, 0, 0, 1, 1)
@@ -36,6 +40,7 @@ class Entries(QWidget):
         layout.addWidget(self.add_entry_button, 1, 1, 1, 1)
         layout.addWidget(self.view_and_edit_entry_button, 2, 1, 1, 1)
         layout.addWidget(self.delete_button, 3, 1, 1, 1)
+        layout.addWidget(self.back_button, 10, 1, 1, 1)
         self.setLayout(layout)
         self.setWindowTitle('Agelena Consociata')
         self.setGeometry(400, 400, 900, 556)
@@ -63,6 +68,10 @@ class Entries(QWidget):
                 delete_filter = {"first_name": names[0], "last_name": names[1]}
                 self.people.delete_one(delete_filter)
             self.refresh()
+
+    def back_button_clicked(self):
+        self.startup_window.setVisible(True)
+        self.destroy()
 
     def view_and_edit_button_clicked(self):
         if self.people_list.currentItem():
