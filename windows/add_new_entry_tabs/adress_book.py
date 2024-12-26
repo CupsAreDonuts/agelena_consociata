@@ -37,19 +37,22 @@ class AddressBook(QWidget):
 
     def create_tab(self):
         if self.add_new_entry_window.edit_mode:
-            self.first_name_input.setText(self.add_new_entry_window.person['first_name'])
-            self.middle_name_input.setText(self.add_new_entry_window.person['middle_name'])
-            self.last_name_input.setText(self.add_new_entry_window.person['last_name'])
-            self.birthday_input.setText(self.add_new_entry_window.person['birthday'])
-            self.gender_input.setText(self.add_new_entry_window.person['gender'])
-            self.mobile_phone_input.setText(self.add_new_entry_window.person['mobile_phone'])
-            self.email_input.setText(self.add_new_entry_window.person['email'])
-            self.street_and_number_input.setText(self.add_new_entry_window.person['street_and_number'])
-            self.postcode_input.setText(self.add_new_entry_window.person['postcode'])
-            self.city_input.setText(self.add_new_entry_window.person['city'])
-            self.country_input.setText(self.add_new_entry_window.person['country'])
-            self.first_contact_input.setText(self.add_new_entry_window.person['first_contact'])
-            self.history_summary_input.setText(self.add_new_entry_window.person['history'])
+            try:
+                self.first_name_input.setText(self.add_new_entry_window.person['first_name'])
+                self.middle_name_input.setText(self.add_new_entry_window.person['middle_name'])
+                self.last_name_input.setText(self.add_new_entry_window.person['last_name'])
+                self.birthday_input.setText(self.add_new_entry_window.person['birthday'])
+                self.gender_input.setText(self.add_new_entry_window.person['gender'])
+                self.mobile_phone_input.setText(self.add_new_entry_window.person['mobile_phone'])
+                self.email_input.setText(self.add_new_entry_window.person['email'])
+                self.street_and_number_input.setText(self.add_new_entry_window.person['street_and_number'])
+                self.postcode_input.setText(self.add_new_entry_window.person['postcode'])
+                self.city_input.setText(self.add_new_entry_window.person['city'])
+                self.country_input.setText(self.add_new_entry_window.person['country'])
+                self.first_contact_input.setText(self.add_new_entry_window.person['first_contact'])
+                self.history_summary_input.setText(self.add_new_entry_window.person['history'])
+            except KeyError:
+                pass
 
         self.add_entry_button.clicked.connect(self.add_new_entry_window.add_button_clicked)  # noqa
         self.add_entry_button.setMinimumWidth(130)

@@ -6,6 +6,7 @@ from windows.add_new_entry_tabs.adress_book import AddressBook
 from windows.add_new_entry_tabs.inside import InsideAttributes
 from windows.add_new_entry_tabs.outside import OutsideAttributes
 from windows.add_new_entry_tabs.relations import RelationalAttributes
+from windows.add_new_entry_tabs.benefits_costs import BenefitsAndCosts
 
 
 class NewEntryWindow(QTabWidget):
@@ -19,17 +20,20 @@ class NewEntryWindow(QTabWidget):
         self.inside_personal_attributes = InsideAttributes(self)
         self.outside_personal_attributes = OutsideAttributes(self)
         self.related_people_attributes = RelationalAttributes(self)
+        self.benefits_attributes = BenefitsAndCosts(self)
 
     def create_window(self):
         self.address_book.create_tab()
         self.inside_personal_attributes.create_tab()
         self.outside_personal_attributes.create_tab()
         self.related_people_attributes.create_tab()
+        self.benefits_attributes.create_tab()
 
         self.addTab(self.address_book, 'Address book')
         self.addTab(self.inside_personal_attributes, 'Inside')
         self.addTab(self.outside_personal_attributes, 'Outside')
         self.addTab(self.related_people_attributes, 'Relations')
+        self.addTab(self.benefits_attributes, 'Benefits and Costs')
         self.setTabPosition(QTabWidget.North)
 
         self.setWindowTitle('Agelena Consociata')
