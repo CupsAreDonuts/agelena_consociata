@@ -48,25 +48,28 @@ class InsideAttributes(QWidget):
 
     def create_tab(self):
         if self.add_new_entry_window.edit_mode:
-            self.likes_input.setText(self.add_new_entry_window.person['likes'])
-            self.dislikes_input.setText(self.add_new_entry_window.person['dislikes'])
-            self.wants_input.setText(self.add_new_entry_window.person['wants'])
-            self.fears_input.setText(self.add_new_entry_window.person['fears'])
-            self.confidence_input.setText(self.add_new_entry_window.person['confidence'])
-            self.openness_input.setText(self.add_new_entry_window.person['openness'])
-            self.conscientiousness_input.setText(self.add_new_entry_window.person['conscientiousness'])
-            self.extraversion_input.setText(self.add_new_entry_window.person['extraversion'])
-            self.agreeableness_input.setText(self.add_new_entry_window.person['agreeableness'])
-            self.neuroticism_input.setText(self.add_new_entry_window.person['neuroticism'])
-            self.ambitiousness_input.setText(self.add_new_entry_window.person['ambitiousness'])
-            self.education_input.setText(self.add_new_entry_window.person['education'])
-            self.subject_of_study_input.setText(self.add_new_entry_window.person['subject_of_study'])
-            self.bad_mental_health_indicators_input.setText(
-                self.add_new_entry_window.person['bad_mental_health_indicators'])
-            self.risk_tolerance_input.setText(self.add_new_entry_window.person['risk_tolerance'])
-            self.risk_seeking_input.setText(self.add_new_entry_window.person['risk_seeking'])
-            self.goals_input.setText(self.add_new_entry_window.person['goals'])
-            self.hobbies_input.setText(self.add_new_entry_window.person['hobbies'])
+            try:
+                self.likes_input.setText(self.add_new_entry_window.person['likes'])
+                self.dislikes_input.setText(self.add_new_entry_window.person['dislikes'])
+                self.wants_input.setText(self.add_new_entry_window.person['wants'])
+                self.fears_input.setText(self.add_new_entry_window.person['fears'])
+                self.confidence_input.setText(self.add_new_entry_window.person['confidence'])
+                self.openness_input.setText(self.add_new_entry_window.person['openness'])
+                self.conscientiousness_input.setText(self.add_new_entry_window.person['conscientiousness'])
+                self.extraversion_input.setText(self.add_new_entry_window.person['extraversion'])
+                self.agreeableness_input.setText(self.add_new_entry_window.person['agreeableness'])
+                self.neuroticism_input.setText(self.add_new_entry_window.person['neuroticism'])
+                self.ambitiousness_input.setText(self.add_new_entry_window.person['ambitiousness'])
+                self.education_input.setText(self.add_new_entry_window.person['education'])
+                self.subject_of_study_input.setText(self.add_new_entry_window.person['subject_of_study'])
+                self.bad_mental_health_indicators_input.setText(
+                    self.add_new_entry_window.person['bad_mental_health_indicators'])
+                self.risk_tolerance_input.setText(self.add_new_entry_window.person['risk_tolerance'])
+                self.risk_seeking_input.setText(self.add_new_entry_window.person['risk_seeking'])
+                self.goals_input.setText(self.add_new_entry_window.person['goals'])
+                self.hobbies_input.setText(self.add_new_entry_window.person['hobbies'])
+            except KeyError:
+                pass
 
         self.add_entry_button.setMinimumWidth(130)
         self.add_entry_button.clicked.connect(self.add_new_entry_window.add_button_clicked)  # noqa
