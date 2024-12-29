@@ -11,6 +11,7 @@ def run():
     QDir().setCurrent(os.path.dirname(os.path.abspath(__file__)))
     app = QApplication(sys.argv)
     app.setWindowIcon(QIcon('icons/global_spider.png'))
+    app.setStyle('Fusion')
     startup_window = StartUp()
     startup_window.create_window()
     startup_window.show()
