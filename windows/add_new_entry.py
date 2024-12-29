@@ -60,7 +60,8 @@ class NewEntryWindow(QTabWidget):
         inside = self.inside_personal_attributes.collect_information()
         outside = self.outside_personal_attributes.collect_information()
         relations = self.related_people_attributes.collect_information()
-        personal_attributes = {**address_book, **inside, **outside, **relations}
+        benefits = self.benefits_attributes.collect_information()
+        personal_attributes = {**address_book, **inside, **outside, **relations, **benefits}
         today = datetime.datetime.today().strftime('%d.%m.%Y')
         personal_attributes['last_changed'] = today
         return personal_attributes
