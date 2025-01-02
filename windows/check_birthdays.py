@@ -33,8 +33,8 @@ class Birthdays(QWidget):
         back_button_shortcut = QShortcut(QKeySequence('B'), self)
         back_button_shortcut.activated.connect(self.back_button_clicked)  # noqa
 
-        self.birthdays_from.selectionChanged.connect(self.setup_people_found)
-        self.birthdays_until.selectionChanged.connect(self.setup_people_found)
+        self.birthdays_from.selectionChanged.connect(self.setup_people_found)  # noqa
+        self.birthdays_until.selectionChanged.connect(self.setup_people_found)  # noqa
 
         selection_and_buttons = QVBoxLayout()
         selection_and_buttons.addWidget(self.birthdays_from_label)
