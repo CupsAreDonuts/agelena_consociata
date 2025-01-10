@@ -15,13 +15,13 @@ class Birthdays(QWidget):
         self.people_dataframe_filtered = None
 
         self.birthdays_from_label = QLabel('From:')
-        self.birthdays_from = QCalendarWidget()
+        self.birthdays_from = QCalendarWidget() # noqa
 
         self.birthdays_until_label = QLabel('Until:')
-        self.birthdays_until = QCalendarWidget()
-        self.birthdays_until.setSelectedDate(QDate.currentDate().addDays(30))
+        self.birthdays_until = QCalendarWidget() # noqa
+        self.birthdays_until.setSelectedDate(QDate.currentDate().addDays(30)) # noqa
 
-        self.people_found = QListWidget()
+        self.people_found = QListWidget() # noqa
         self.back_button = QPushButton('Back (B)')
 
     def create_window(self):
@@ -83,8 +83,6 @@ class Birthdays(QWidget):
         self.people_dataframe_filtered.sort_values(by='day_of_year', ascending=True, inplace=True)
         self.people_dataframe_filtered = self.people_dataframe_filtered.reset_index(drop=True)
 
-        print(self.people_dataframe_filtered['birthday_filtered'])
-
     def back_button_clicked(self):
         self.startup_window.show()
         self.close()
@@ -95,4 +93,3 @@ def adjust_birthday(birthday: str):
         return birthday[:6] + '2000'
     else:
         return birthday
-
