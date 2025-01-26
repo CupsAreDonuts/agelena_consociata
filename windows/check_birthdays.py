@@ -48,6 +48,8 @@ class Birthdays(QWidget):
         layout.addLayout(selection_and_buttons)
         self.setLayout(layout)
 
+        self.setGeometry(200, 200, 700, 556)
+
     def setup_people_found(self):
         self.people_found.clear()
 

@@ -43,7 +43,7 @@ class Entries(QWidget):
         layout.addWidget(self.back_button, 10, 1, 1, 1)
         self.setLayout(layout)
         self.setWindowTitle('Agelena Consociata')
-        self.setGeometry(400, 400, 900, 556)
+        self.setGeometry(200, 200, 900, 556)
 
     def fill_people_list(self):
         self.people_as_table.sort_values(by='first_name', inplace=True)

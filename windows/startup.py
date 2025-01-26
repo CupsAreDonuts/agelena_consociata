@@ -29,7 +29,7 @@ class StartUp(QWidget):
         self.setLayout(layout)
 
         self.setWindowTitle('Welcome to Agelena Consociata')
-        self.setGeometry(300, 300, 300, 300)
+        self.setGeometry(200, 200, 300, 300)
 
     def view_entries_clicked(self):
         self.entries = Entries(startup_window=self)
