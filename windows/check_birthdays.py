@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import (
     QWidget, QPushButton, QCalendarWidget, QHBoxLayout, QVBoxLayout, QListWidget, QLabel, QShortcut)
 from PyQt5.QtCore import Qt, QDate
 from PyQt5.QtGui import QKeySequence
-from data.mongo import get_people
+from data.mongodb.social_database import get_people
 
 
 class Birthdays(QWidget):

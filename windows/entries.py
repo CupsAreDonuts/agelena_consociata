@@ -1,7 +1,7 @@
 import pandas as pd
 from PyQt5.QtWidgets import QWidget, QPushButton, QGridLayout, QListWidget, QLabel, QMessageBox, QShortcut
 from PyQt5.QtGui import QKeySequence
-from data.mongo import get_people, get_all_entries_of_person
+from data.mongodb.social_database import get_people, get_all_entries_of_person
 from windows.add_new_entry import NewEntryWindow
 
 

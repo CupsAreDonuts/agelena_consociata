@@ -10,6 +10,11 @@ def get_social_database():
     return client['social_database']
 
 
+def get_meetings():
+    social_database = get_social_database()
+    return social_database['meetings']
+
+
 def get_people():
     social_database = get_social_database()
     return social_database['people']
