@@ -3,11 +3,14 @@ from PyQt5.QtWidgets import QWidget, QListWidget, QLabel, QPushButton, QGridLayo
 from PyQt5.QtGui import QKeySequence
 from data.mongodb.social_database import get_meetings
 
+from windows.add_meeting import  AddMeeting
+
 
 class Meetings(QWidget):
     def __init__(self, startup_window):
         super().__init__()  # noqa
         self.startup_window = startup_window
+        self.add_meeting_window = None
         self.meetings = get_meetings()
         self.meetings_as_table = None
         self.meetings_list = QListWidget()   # noqa
@@ -45,6 +48,10 @@ class Meetings(QWidget):
 
     def add_meeting_button_clicked(self):
         self.setVisible(False)
+        self.add_meeting_window = AddMeeting(self)
+        self.add_meeting_window.create_window()
+        self.add_meeting_window.show()
+
         pass
 
     def back_button_clicked(self):

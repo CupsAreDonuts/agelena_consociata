@@ -10,11 +10,6 @@ def get_social_database():
     return client['social_database']
 
 
-def get_meetings():
-    social_database = get_social_database()
-    return social_database['meetings']
-
-
 def get_people():
     social_database = get_social_database()
     return social_database['people']
@@ -32,3 +27,13 @@ def get_all_entries_of_person(first_name: str, last_name: str) -> list:
     query = {'first_name': first_name, 'last_name': last_name}
     found_people = get_people().find(query)
     return list(found_people)
+
+
+def get_meetings():
+    social_database = get_social_database()
+    return social_database['meetings']
+
+
+def add_meeting_in_meetings(meeting: dict):
+    meetings = get_meetings()
+    meetings.insert_one(meeting)
