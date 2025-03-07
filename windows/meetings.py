@@ -56,7 +56,8 @@ class Meetings(QWidget):
             lambda date: datetime.strptime(date, '%d.%m.%Y'))
         self.meetings_as_table.sort_values(by='date', inplace=True)
         for meeting in self.meetings_as_table.itertuples():
-            self.meetings_list.addItem(str(meeting.date.strftime('%d.%m.%Y')) + ' ' + str(meeting.participants))
+            self.meetings_list.addItem(str(meeting.date.strftime('%d.%m.%Y')) + ' at ' + str(meeting.time) + ' with ' +
+                                       str(meeting.participants))
 
     def add_meeting_button_clicked(self):
         self.setVisible(False)
@@ -68,15 +69,14 @@ class Meetings(QWidget):
     def edit_meeting_button_clicked(self):
         if self.meetings_list.currentItem():
             date = self.meetings_list.currentItem().text()[:10]
-            participants = self.meetings_list.currentItem().text()[11:]
-            matching_meetings = find_meeting_in_meetings({'date': date, 'participants': participants})
-            for meeting in matching_meetings:
-                print(meeting)
-                self.add_meeting_window = AddMeeting(self, meeting)
-                self.add_meeting_window.show()
-
-
-        pass
+            time = self.meetings_list.currentItem().text()[14:19]
+            participants = self.meetings_list.currentItem().text()[25:]
+            meeting = find_meeting_in_meetings({'date': date, 'time': time, 'participants': participants})
+            self.add_meeting_window = AddMeeting(self, meeting)
+            self.add_meeting_window.create_window()
+            self.setVisible(False)
+            self.add_meeting_window.show()
+            pass
 
     def back_button_clicked(self):
         self.startup_window.setVisible(True)

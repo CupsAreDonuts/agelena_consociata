@@ -39,7 +39,14 @@ def add_meeting_in_meetings(meeting: dict):
     meetings.insert_one(meeting)
 
 
+def edit_meeting_in_meetings(previous_meeting: dict, edited_meeting: dict):
+    meetings = get_meetings()
+    meetings.update_one({'date': previous_meeting['date'],
+                         'time': previous_meeting['time'],
+                         'participants': previous_meeting['participants']},
+                        {"$set": edited_meeting})
+
+
 def find_meeting_in_meetings(query: dict):
     meetings = get_meetings()
-    return meetings.find(query)
-
+    return meetings.find_one(query)
