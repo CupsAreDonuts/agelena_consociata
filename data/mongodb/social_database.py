@@ -37,3 +37,9 @@ def get_meetings():
 def add_meeting_in_meetings(meeting: dict):
     meetings = get_meetings()
     meetings.insert_one(meeting)
+
+
+def find_meeting_in_meetings(query: dict):
+    meetings = get_meetings()
+    return meetings.find(query)
+

@@ -10,12 +10,13 @@ from PyQt5.QtWidgets import (QWidget,
                              QTextEdit,
                              QCheckBox)
 from PyQt5.QtGui import QKeySequence
+from PyQt5.QtCore import QDate
 
 from data.mongodb.social_database import add_meeting_in_meetings
 
 
 class AddMeeting(QWidget):
-    def __init__(self, meetings_window):
+    def __init__(self, meetings_window, previous: None | dict = None):
         super().__init__()  # noqa
         self.meetings_window = meetings_window
         self.date_label = QLabel('Date')
@@ -36,6 +37,8 @@ class AddMeeting(QWidget):
         self.add_button = QPushButton('Add Meeting')
         self.back_button_shortcut = QShortcut(QKeySequence('B'), self)
         self.back_button = QPushButton('Back (B)')
+
+        self.previous = previous
 
     def create_window(self):
         self.add_button.clicked.connect(self.add_button_clicked)  # noqa
@@ -64,15 +67,27 @@ class AddMeeting(QWidget):
         self.setWindowTitle('Agelena Consociata')
         self.setGeometry(200, 200, 900, 556)
 
+        if self.previous:
+            previous_date = QDate.fromString(self.previous['date'], 'dd.MM.yyyy')
+            self.date_input.setSelectedDate(previous_date)
+            self.location_input.setText(self.previous['location'])
+            self.reason.setText(self.previous['reason'])
+            self.type.setText(self.previous['type'])
+            self.participants.setText(self.previous['participants'])
+            self.notes.setText(self.previous['notes'])
+            if self.previous['finalised'] == 'yes':
+                self.finalised.setChecked(True)
+
     def add_button_clicked(self):
         if self.participants.toPlainText() and self.location_input.toPlainText() and self.type.text():
-            meeting = {'date': self.date_input.selectedDate().toString('dd-MM-yyyy'),
+            meeting = {'date': self.date_input.selectedDate().toString('dd.MM.yyyy'),
                        'location': self.location_input.toPlainText(),
                        'reason': self.reason.toPlainText(),
                        'type': self.type.text(),
                        'participants': self.participants.toPlainText(),
                        'notes': self.notes.toPlainText(),
                        'finalised': 'yes' if self.finalised.checkState() else 'no'}
+            print(meeting)
             add_meeting_in_meetings(meeting)
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Information)
@@ -97,5 +112,6 @@ class AddMeeting(QWidget):
             msg.exec()
 
     def back_button_clicked(self):
+        self.meetings_window.create_window()
         self.meetings_window.setVisible(True)
         self.destroy()
