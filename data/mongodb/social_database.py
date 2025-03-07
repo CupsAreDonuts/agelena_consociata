@@ -47,6 +47,11 @@ def edit_meeting_in_meetings(previous_meeting: dict, edited_meeting: dict):
                         {"$set": edited_meeting})
 
 
+def delete_meeting_in_meetings(meeting: dict):
+    meetings = get_meetings()
+    meetings.delete_one(meeting)
+
+
 def find_meeting_in_meetings(query: dict):
     meetings = get_meetings()
     return meetings.find_one(query)

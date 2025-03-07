@@ -1,7 +1,6 @@
 from PyQt5.QtWidgets import (QWidget,
                              QPushButton,
                              QVBoxLayout,
-                             QListWidget,
                              QLabel,
                              QMessageBox,
                              QShortcut,
@@ -104,6 +103,9 @@ class AddMeeting(QWidget):
 
             if not self.previous:
                 self.clear_input()
+            else:
+                self.meetings_window.setVisible(True)
+                self.destroy()
 
         else:
             msg = QMessageBox()
