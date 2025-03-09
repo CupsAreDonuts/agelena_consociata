@@ -47,7 +47,7 @@ class Meetings(QWidget):
             self.delete_meeting_button.clicked.connect(self.delete_button_clicked)  # noqa
             self.back_button.clicked.connect(self.back_button_clicked)  # noqa
             self.back_button_shortcut.activated.connect(self.back_button_clicked)  # noqa
-            self.include_finalised_checkbox.clicked.connect(self.finalised_checkbox_clicked)
+            self.include_finalised_checkbox.clicked.connect(self.finalised_checkbox_clicked)  # noqa
 
             layout = QGridLayout()
             layout.addWidget(self.meetings_headline, 0, 0, 1, 1)
@@ -71,7 +71,8 @@ class Meetings(QWidget):
         self.meetings_as_table.sort_values(by='date', inplace=True)
         for meeting in self.meetings_as_table.itertuples():
             if self.include_finalised_checkbox.checkState() == 2:
-                self.meetings_list.addItem(str(meeting.date.strftime('%d.%m.%Y')) + ' at ' + str(meeting.time) + ' with ' +
+                self.meetings_list.addItem(str(meeting.date.strftime('%d.%m.%Y')) + ' at ' + str(meeting.time) +
+                                           ' with ' +
                                            str(meeting.participants))
             else:
                 if meeting.finalised.endswith('no'):
