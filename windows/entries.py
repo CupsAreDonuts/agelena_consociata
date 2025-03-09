@@ -1,7 +1,7 @@
 import pandas as pd
 from PyQt5.QtWidgets import QWidget, QPushButton, QGridLayout, QListWidget, QLabel, QMessageBox, QShortcut
 from PyQt5.QtGui import QKeySequence
-from data.mongo import get_people, get_all_entries_of_person
+from data.mongodb.social_database import get_people, get_all_entries_of_person
 from windows.add_new_entry import NewEntryWindow
 
 
@@ -43,7 +43,7 @@ class Entries(QWidget):
         layout.addWidget(self.back_button, 10, 1, 1, 1)
         self.setLayout(layout)
         self.setWindowTitle('Agelena Consociata')
-        self.setGeometry(400, 400, 900, 556)
+        self.setGeometry(200, 200, 900, 556)
 
     def fill_people_list(self):
         self.people_as_table.sort_values(by='first_name', inplace=True)

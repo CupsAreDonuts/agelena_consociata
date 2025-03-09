@@ -1,6 +1,6 @@
 import datetime
 from PyQt5.QtWidgets import QTabWidget, QMessageBox
-from data.mongo import add_person_in_people, edit_person_in_people
+from data.mongodb.social_database import add_person_in_people, edit_person_in_people
 
 from windows.add_new_entry_tabs.adress_book import AddressBook
 from windows.add_new_entry_tabs.inside import InsideAttributes
